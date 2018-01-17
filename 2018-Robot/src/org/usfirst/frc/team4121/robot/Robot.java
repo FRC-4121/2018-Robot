@@ -43,7 +43,6 @@ public class Robot extends IterativeRobot {
 	//Subsystems
 	public static DriveTrainSubsystem driveTrain;
 	public static ShifterSubsystem shifter;
-	public static ShooterSubsystem shooting;
 	public static ClimberSubsystem climber;
 	
 	//Commands
@@ -84,7 +83,6 @@ public class Robot extends IterativeRobot {
 		//Initialize subsystems
 		driveTrain = new DriveTrainSubsystem();
 		shifter = new ShifterSubsystem();
-		shooting = new ShooterSubsystem();
 		climber = new ClimberSubsystem();
 		oi = new OI();
 	
