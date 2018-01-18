@@ -1,6 +1,0 @@
-INDEX VERSION 1.130+/home/matthew/Documents/Code/javaProjects/2018-Robot/.metadata/.plugins/org.eclipse.jdt.core
-245417005.index
-861716544.index
-3257950484.index
-2671714900.index
-143248807.index
