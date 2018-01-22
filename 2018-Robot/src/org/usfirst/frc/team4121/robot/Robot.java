@@ -7,24 +7,17 @@ import org.usfirst.frc.team4121.robot.commands.AutoDriveStraightCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoTurnLeftCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoTurnRightCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.ExampleCommand;
-import org.usfirst.frc.team4121.robot.commands.FindBoilerTargetCommand;
 import org.usfirst.frc.team4121.robot.commands.FindGearTargetCommand;
-import org.usfirst.frc.team4121.robot.commands.NewDriveStraightCommandGoup;
-import org.usfirst.frc.team4121.robot.extraClasses.VisionProcessor;
 import org.usfirst.frc.team4121.robot.extraClasses.VisionRead;
-import org.usfirst.frc.team4121.robot.extraClasses.MyVisionThread;
 import org.usfirst.frc.team4121.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.DriveTrainSubsystem;
-import org.usfirst.frc.team4121.robot.subsystems.LimitSwitchSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.ShifterSubsystem;
-import org.usfirst.frc.team4121.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.vision.VisionThread;
@@ -36,14 +29,13 @@ import edu.wpi.first.wpilibj.vision.VisionRunner;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  * 
- * @author Ben Hayden
+ * @author Saliva Crustyman
  */
 public class Robot extends IterativeRobot {
 		
 	//Subsystems
 	public static DriveTrainSubsystem driveTrain;
 	public static ShifterSubsystem shifter;
-	public static ShooterSubsystem shooting;
 	public static ClimberSubsystem climber;
 	
 	//Commands
@@ -84,7 +76,6 @@ public class Robot extends IterativeRobot {
 		//Initialize subsystems
 		driveTrain = new DriveTrainSubsystem();
 		shifter = new ShifterSubsystem();
-		shooting = new ShooterSubsystem();
 		climber = new ClimberSubsystem();
 		oi = new OI();
 	
@@ -285,8 +276,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		
-		//Start live window
-		LiveWindow.run();
+		
 		
 	}
 }
