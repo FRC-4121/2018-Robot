@@ -6,10 +6,13 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team4121.robot.Robot;
+import org.usfirst.frc.team4121.robot.RobotMap;
 
 public class VisionProcessor {
 	private double returnedValue;
+	private VisionRead vsubsystem;
 	private ArrayList<MatOfPoint> foundContours;
 	private Point centerOfImage;
 	private double isFacing = 0;

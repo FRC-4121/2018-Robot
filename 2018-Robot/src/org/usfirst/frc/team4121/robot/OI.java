@@ -9,15 +9,27 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 import org.usfirst.frc.team4121.robot.commands.ClimbCommand;
+import org.usfirst.frc.team4121.robot.commands.CloseGateCommand;
+import org.usfirst.frc.team4121.robot.commands.DecreaseShootSpeedCommand;
+import org.usfirst.frc.team4121.robot.commands.FeedCommand;
+import org.usfirst.frc.team4121.robot.commands.FindBoilerTargetCommand;
+import org.usfirst.frc.team4121.robot.commands.FindGearTargetCommand;
+import org.usfirst.frc.team4121.robot.commands.IncreaseShootSpeedCommand;
+import org.usfirst.frc.team4121.robot.commands.OpenGateCommand;
 import org.usfirst.frc.team4121.robot.commands.ShiftDownCommand;
 import org.usfirst.frc.team4121.robot.commands.ShiftUpCommand;
+import org.usfirst.frc.team4121.robot.commands.ShootCommand;
+import org.usfirst.frc.team4121.robot.commands.ShootCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.StopClimbCommand;
+import org.usfirst.frc.team4121.robot.commands.StopEverythingShootingCommandGroup;
+import org.usfirst.frc.team4121.robot.commands.StopShootCommand;
+import org.usfirst.frc.team4121.robot.commands.SwitchCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.SwitchDriveCommand;
 
 /**
  * This is the main class that initializes and tells what buttons to do what.
  * 
- * @author Saliva Cressman
+ * @author Ben Hayden
  */
 public class OI {
 	
@@ -63,6 +75,8 @@ public class OI {
 		shiftUp = new JoystickButton(leftJoy, 5);
 		
 		//Commands
+		shoot.whileHeld(new ShootCommand());//put logic in shoot command now
+		shoot.whenReleased(new StopEverythingShootingCommandGroup());
 		//servo.whileHeld(new OpenGateCommand());
 		//servo.whenReleased(new CloseGateCommand());
 		//feed.whileHeld(new FeedCommand());

@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FindBoilerTargetCommand extends Command {
+public class OpenGateCommand extends Command {
 
-    public FindBoilerTargetCommand() {
-    	//requires(Robot.visionSub);
+    public OpenGateCommand() {
+        requires(Robot.shooting);
     }
 
     // Called just before this Command runs the first time
@@ -19,12 +19,12 @@ public class FindBoilerTargetCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.visionSub.findBoiler();
+    	Robot.shooting.openGates();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
