@@ -2,7 +2,7 @@ package org.usfirst.frc.team4121.robot.subsystems;
 
 import org.usfirst.frc.team4121.robot.RobotMap;
 
-import com.ctre.CANTalon;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Salivyia Crestpan
  */
 public class ClimberSubsystem extends Subsystem {
-	public CANTalon climb = new CANTalon(RobotMap.CLIMBER);
+	public Talon climb = new Talon(RobotMap.CLIMBER);
 
     public void initDefaultCommand() {
     	
