@@ -4,6 +4,7 @@ import org.usfirst.frc.team4121.robot.Robot;
 import org.usfirst.frc.team4121.robot.RobotMap;
 import org.usfirst.frc.team4121.robot.commands.DriveWithJoysticksCommand;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -44,12 +45,14 @@ public class DriveTrainSubsystem extends Subsystem {
 
 		if(RobotMap.DIRECTION_MULTIPLIER==1)
 		{
-			drive.tankDrive(Robot.oi.leftJoy.getY()*RobotMap.DIRECTION_MULTIPLIER*.97, Robot.oi.rightJoy.getY()*RobotMap.DIRECTION_MULTIPLIER);
+//			drive.tankDrive(Robot.oi.leftJoy.getY()*RobotMap.DIRECTION_MULTIPLIER*.97, Robot.oi.rightJoy.getY()*RobotMap.DIRECTION_MULTIPLIER);
+			drive.tankDrive(Robot.oi.xbox.getY(Hand.kLeft)*RobotMap.DIRECTION_MULTIPLIER, Robot.oi.xbox.getY(Hand.kRight)*RobotMap.DIRECTION_MULTIPLIER);
 		
 		}
 		else
 		{
-			drive.tankDrive(Robot.oi.rightJoy.getY()*RobotMap.DIRECTION_MULTIPLIER*.98, Robot.oi.leftJoy.getY()*RobotMap.DIRECTION_MULTIPLIER);	
+			//drive.tankDrive(Robot.oi.rightJoy.getY()*RobotMap.DIRECTION_MULTIPLIER*.98, Robot.oi.leftJoy.getY()*RobotMap.DIRECTION_MULTIPLIER);
+			drive.tankDrive(Robot.oi.xbox.getY(Hand.kRight)*RobotMap.DIRECTION_MULTIPLIER, Robot.oi.xbox.getY(Hand.kLeft)*RobotMap.DIRECTION_MULTIPLIER); 
 		}
 		
 		drive.setSafetyEnabled(false);

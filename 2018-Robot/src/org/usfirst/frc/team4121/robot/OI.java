@@ -3,7 +3,9 @@ package org.usfirst.frc.team4121.robot;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -23,10 +25,13 @@ public class OI {
 	
 	//Initializations
 	public Joystick leftJoy, rightJoy;
+	public XboxController xbox;
 	public DigitalInput limitSwitch;
 	public ADXRS450_Gyro MainGyro;
 	public Encoder rightEncoder, leftEncoder;
 	public Button shoot, feed, climb, servo, shiftUp, shiftDown, gear, boiler, switchDrive, increaseShootSpeed, decreaseShootSpeed;
+	public Button switchDrivexbox;
+	
 	
 	public OI() {
 	
@@ -48,13 +53,14 @@ public class OI {
 		//Joysticks
 		leftJoy = new Joystick(0);
 		rightJoy = new Joystick(1);
-	
+		xbox = new XboxController(0); //can change later
+		
 		//Buttons
 		shoot = new JoystickButton(rightJoy, 1);
 		//decreaseShootSpeed = new JoystickButton (rightJoy, 2);
 		//servo = new JoystickButton(rightJoy,2);
 		//increaseShootSpeed = new JoystickButton (rightJoy, 3);
-		switchDrive = new JoystickButton(rightJoy, 4);
+		switchDrivexbox = new JoystickButton(rightJoy, 4);
 		//feed = new JoystickButton(rightJoy, 3);
 		climb = new JoystickButton(leftJoy, 1);
 		gear = new JoystickButton(leftJoy, 2);
@@ -62,16 +68,18 @@ public class OI {
 		shiftDown = new JoystickButton(leftJoy, 4);
 		shiftUp = new JoystickButton(leftJoy, 5);
 		
+		
 		//Commands
 		//servo.whileHeld(new OpenGateCommand());
 		//servo.whenReleased(new CloseGateCommand());
 		//feed.whileHeld(new FeedCommand());
-		climb.whileHeld(new ClimbCommand());
-		climb.whenReleased(new StopClimbCommand());
-		shiftUp.whenActive(new ShiftUpCommand());
-		shiftDown.whenActive(new ShiftDownCommand());
+		//climb.whileHeld(new ClimbCommand());
+		//climb.whenReleased(new StopClimbCommand());
+		//shiftUp.whenActive(new ShiftUpCommand());
+		//shiftDown.whenActive(new ShiftDownCommand());
 		//gear.whenPressed(new FindGearTargetCommand());
 		//boiler.whenPressed(new FindBoilerTargetCommand());
+		switchDrive.whenPressed(new SwitchDriveCommand());
 		switchDrive.whenPressed(new SwitchDriveCommand());
 		//decreaseShootSpeed.whenPressed(new DecreaseShootSpeedCommand());
 		//increaseShootSpeed.whenPressed(new IncreaseShootSpeedCommand());

@@ -6,7 +6,7 @@ package org.usfirst.frc.team4121.robot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  * 
- * @author Ben Hayden
+ * @author Hen "traitor" Bayden thanks ben for showing up 
  */
 public class RobotMap {
 	public static final int LEFT_MOTOR_FRONT = 1;
