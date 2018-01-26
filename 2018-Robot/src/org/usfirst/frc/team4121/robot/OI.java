@@ -53,14 +53,16 @@ public class OI {
 		//Joysticks
 		leftJoy = new Joystick(0);
 		rightJoy = new Joystick(1);
-		xbox = new XboxController(0); //can change later
+		//xbox = new XboxController(0); //can change later
 		
 		//Buttons
 		shoot = new JoystickButton(rightJoy, 1);
 		//decreaseShootSpeed = new JoystickButton (rightJoy, 2);
 		//servo = new JoystickButton(rightJoy,2);
 		//increaseShootSpeed = new JoystickButton (rightJoy, 3);
-		switchDrivexbox = new JoystickButton(rightJoy, 4);
+		
+		//switchDrivexbox = new JoystickButton(rightJoy, 4);
+		
 		//feed = new JoystickButton(rightJoy, 3);
 		climb = new JoystickButton(leftJoy, 1);
 		gear = new JoystickButton(leftJoy, 2);
@@ -80,7 +82,9 @@ public class OI {
 		//gear.whenPressed(new FindGearTargetCommand());
 		//boiler.whenPressed(new FindBoilerTargetCommand());
 		switchDrive.whenPressed(new SwitchDriveCommand());
-		switchDrive.whenPressed(new SwitchDriveCommand());
+		
+		//switchDrivexbox.whenPressed(new SwitchDriveCommand());
+		
 		//decreaseShootSpeed.whenPressed(new DecreaseShootSpeedCommand());
 		//increaseShootSpeed.whenPressed(new IncreaseShootSpeedCommand());
 		

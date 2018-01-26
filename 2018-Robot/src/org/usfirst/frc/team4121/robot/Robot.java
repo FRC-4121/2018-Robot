@@ -12,11 +12,15 @@ import org.usfirst.frc.team4121.robot.commands.FindGearTargetCommand;
 import org.usfirst.frc.team4121.robot.extraClasses.VisionRead;
 import org.usfirst.frc.team4121.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.DriveTrainSubsystem;
+import org.usfirst.frc.team4121.robot.subsystems.EndEffector;
 import org.usfirst.frc.team4121.robot.subsystems.ShifterSubsystem;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -38,6 +42,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrainSubsystem driveTrain;
 	public static ShifterSubsystem shifter;
 	public static ClimberSubsystem climber;
+	public static EndEffector end;
 	
 	//Commands
 	public static FindGearTargetCommand findGear;
@@ -66,7 +71,21 @@ public class Robot extends IterativeRobot {
 	public static double centerOfTargets;
 	public static double targetError;
 	
-	
+	//elevator code Mr.Dermiggio
+//    private static final int kMotorPort = 0;
+//    private static final int kXboxPort = 0;
+//
+//    private TalonSRX m_motor;
+//    private XboxController m_xboxController;
+//    private double targetPos = 0;
+//    private double oldTargetPos;
+//    private double inchesPerRev;
+//    private int encoderPulsesPerOutputRev; // number of motor encoders pulses per encoder output revolution
+
+
+    StringBuilder _sb = new StringBuilder();
+    int _loops = 0;
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -250,6 +269,59 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		
+//		  double motorOutput = m_motor.getMotorOutputPercent();
+//	        /* prepare line to print */
+//	        _sb.append("\tout:");
+//	        _sb.append(motorOutput);
+//	        _sb.append("\tspd:");
+//	        _sb.append(m_motor.getSelectedSensorVelocity(ConstantsElevator.kPIDLoopIdx));
+//
+//
+//
+//	        if (m_xboxController.getAButtonReleased()) // run to scale height
+//	        {
+//	            /* go to scale height */
+//	            oldTargetPos = targetPos;
+//	            targetPos = ConstantsElevator.dPosScale / inchesPerRev * 4096;
+//	            if (targetPos > oldTargetPos) {
+//	                m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedUp / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	                m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationUp / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	            } else {
+//	                m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	                m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	            }
+//
+//	        }
+//
+//	        if (m_xboxController.getBButtonPressed()) // run to switch height
+//	        {
+//	            oldTargetPos = targetPos;
+//	            targetPos = ConstantsElevator.dPosSwitch / inchesPerRev * 4096;
+//	            if (targetPos > oldTargetPos) {
+//	                m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedUp / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	                m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationUp / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	            } else {
+//	                m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	                m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	            }
+//	        }
+//
+//	        if (m_xboxController.getYButtonReleased()) // go to home
+//	        {
+//	            targetPos = 0;
+//	            m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	            m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
+//	        }
+//
+//
+//	        m_motor.set(ControlMode.MotionMagic, targetPos);
+//
+//	        if (++_loops >= 10) {
+//	            _loops = 0;
+//	            System.out.println(_sb.toString());
+//	        }
+//	        _sb.setLength(0);
+//	    
 		//Start scheduler
 		Scheduler.getInstance().run();
  

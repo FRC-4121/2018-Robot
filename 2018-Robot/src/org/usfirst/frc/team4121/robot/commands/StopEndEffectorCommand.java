@@ -1,22 +1,15 @@
 package org.usfirst.frc.team4121.robot.commands;
 
-import org.usfirst.frc.team4121.robot.Robot;
-import org.usfirst.frc.team4121.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
-/**
- *	Climb command
- *
- *	@author Ben Hayden succkss 
- */
-public class ClimbCommand extends Command {
 
-    public ClimbCommand() {
+/**
+ *
+ */
+public class StopEndEffectorCommand extends Command {
+
+    public StopEndEffectorCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	
-    	requires(Robot.climber);
-    	
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +18,6 @@ public class ClimbCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climber.climb(RobotMap.CLIMBER_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()

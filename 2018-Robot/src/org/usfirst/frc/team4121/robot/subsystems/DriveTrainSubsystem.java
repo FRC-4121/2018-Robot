@@ -45,14 +45,14 @@ public class DriveTrainSubsystem extends Subsystem {
 
 		if(RobotMap.DIRECTION_MULTIPLIER==1)
 		{
-//			drive.tankDrive(Robot.oi.leftJoy.getY()*RobotMap.DIRECTION_MULTIPLIER*.97, Robot.oi.rightJoy.getY()*RobotMap.DIRECTION_MULTIPLIER);
-			drive.tankDrive(Robot.oi.xbox.getY(Hand.kLeft)*RobotMap.DIRECTION_MULTIPLIER, Robot.oi.xbox.getY(Hand.kRight)*RobotMap.DIRECTION_MULTIPLIER);
+			drive.tankDrive(Robot.oi.leftJoy.getY()*RobotMap.DIRECTION_MULTIPLIER*.97, Robot.oi.rightJoy.getY()*RobotMap.DIRECTION_MULTIPLIER);
+			//drive.tankDrive(Robot.oi.xbox.getY(Hand.kLeft)*RobotMap.DIRECTION_MULTIPLIER, Robot.oi.xbox.getY(Hand.kRight)*RobotMap.DIRECTION_MULTIPLIER);
 		
 		}
 		else
 		{
-			//drive.tankDrive(Robot.oi.rightJoy.getY()*RobotMap.DIRECTION_MULTIPLIER*.98, Robot.oi.leftJoy.getY()*RobotMap.DIRECTION_MULTIPLIER);
-			drive.tankDrive(Robot.oi.xbox.getY(Hand.kRight)*RobotMap.DIRECTION_MULTIPLIER, Robot.oi.xbox.getY(Hand.kLeft)*RobotMap.DIRECTION_MULTIPLIER); 
+			drive.tankDrive(Robot.oi.rightJoy.getY()*RobotMap.DIRECTION_MULTIPLIER*.98, Robot.oi.leftJoy.getY()*RobotMap.DIRECTION_MULTIPLIER);
+			// drive.tankDrive(Robot.oi.xbox.getY(Hand.kRight)*RobotMap.DIRECTION_MULTIPLIER, Robot.oi.xbox.getY(Hand.kLeft)*RobotMap.DIRECTION_MULTIPLIER); 
 		}
 		
 		drive.setSafetyEnabled(false);

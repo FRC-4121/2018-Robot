@@ -11,14 +11,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Salivyia Crestpan
  */
 public class ClimberSubsystem extends Subsystem {
-	public Talon climb = new Talon(RobotMap.CLIMBER);
+	public Talon climb1 = new Talon(RobotMap.CLIMBER1);
+	public Talon climb2 = new Talon(RobotMap.CLIMBER2);
 
     public void initDefaultCommand() {
     	
     }
     
     public void climb(double climbspeed) {
-    	climb.set(climbspeed);
+    	climb1.set(climbspeed);
+    	climb2.set(climbspeed);
     	
     }
 }
