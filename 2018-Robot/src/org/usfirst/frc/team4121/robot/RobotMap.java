@@ -21,7 +21,7 @@ public class RobotMap {
 	
 	public static final int ENDMOTOR1 = 9;
 	public static final int ENDMOTOR2 = 10;
-	public static final double END_EFFECTOR_SPEED = .5;
+	public static final double END_EFFECTOR_SPEED = .5; 
 	
 	public static final int FEEDER = 11;
 	
