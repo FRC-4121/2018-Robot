@@ -71,6 +71,9 @@ public class Robot extends IterativeRobot {
 	public static double centerOfTargets;
 	public static double targetError;
 	
+	//2018 Game Data
+	public static String gameData;
+	
 	//elevator code Mr.Dermiggio
 //    private static final int kMotorPort = 0;
 //    private static final int kXboxPort = 0;
@@ -108,7 +111,7 @@ public class Robot extends IterativeRobot {
 		//Initialize dashboard choosers
 		chooser = new SendableChooser<>();
 		chooser.addDefault("Do nothing", new AutoStopCommand());
-		chooser.addObject("Straight Foward", new AutoDriveStraightCommandGroup());
+		chooser.addObject("Straight Forward", new AutoDriveStraightCommandGroup());
 		chooser.addObject("Turn Left", new AutoTurnLeftCommandGroup());
 		chooser.addObject("Turn Right", new AutoTurnRightCommandGroup());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -216,6 +219,14 @@ public class Robot extends IterativeRobot {
 		Robot.oi.rightEncoder.reset();
 		Robot.oi.leftEncoder.reset();
 		
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if(gameData.charAt(0) == 'L')
+		{
+			//Put left auto code here
+		} else {
+			//Put right auto code here
+		}
+
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			autonomousCommand.start();

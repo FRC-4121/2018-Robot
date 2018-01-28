@@ -2,7 +2,7 @@ package org.usfirst.frc.team4121.robot.subsystems;
 
 import org.usfirst.frc.team4121.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class EndEffector extends Subsystem {
 
-	public Talon endmotor1 = new Talon(RobotMap.ENDMOTOR1);
-	public Talon endmotor2 = new Talon(RobotMap.ENDMOTOR2);
+	public WPI_TalonSRX endmotor1 = new WPI_TalonSRX(RobotMap.ENDMOTOR1);
+	public WPI_TalonSRX endmotor2 = new WPI_TalonSRX(RobotMap.ENDMOTOR2);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 

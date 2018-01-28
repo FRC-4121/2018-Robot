@@ -1,12 +1,11 @@
 package org.usfirst.frc.team4121.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.*;
 import org.usfirst.frc.team4121.robot.Robot;
 import org.usfirst.frc.team4121.robot.RobotMap;
 import org.usfirst.frc.team4121.robot.commands.DriveWithJoysticksCommand;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,15 +18,15 @@ public class DriveTrainSubsystem extends Subsystem {
 	
 	double leftDirection, rightDirection;
 	
-	//Initializing all Talons using CAN                                                
-	Talon leftMotorFront = new Talon(RobotMap.LEFT_MOTOR_FRONT);
-	Talon leftMotorMid = new Talon(RobotMap.LEFT_MOTOR_MID);
-	Talon leftMotorRear = new Talon(RobotMap.LEFT_MOTOR_REAR);
+	//Initializing all WPI_TalonSRXs using CAN                                                
+	WPI_TalonSRX leftMotorFront = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_FRONT);
+	WPI_TalonSRX leftMotorMid = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_MID);
+	WPI_TalonSRX leftMotorRear = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_REAR);
 	SpeedControllerGroup leftMotor = new SpeedControllerGroup(leftMotorFront, leftMotorMid, leftMotorRear);
 	
-	Talon rightMotorFront = new Talon(RobotMap.RIGHT_MOTOR_FRONT);
-	Talon rightMotorMid = new Talon(RobotMap.RIGHT_MOTOR_MID);
-	Talon rightMotorRear = new Talon(RobotMap.RIGHT_MOTOR_REAR);
+	WPI_TalonSRX rightMotorFront = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_FRONT);
+	WPI_TalonSRX rightMotorMid = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_MID);
+	WPI_TalonSRX rightMotorRear = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_REAR);
 	SpeedControllerGroup rightMotor = new SpeedControllerGroup(rightMotorFront, rightMotorMid, rightMotorRear);
 	
 	//Creating 2 robot drives for all 6 motors
