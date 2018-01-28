@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *	Climb command
  *
- *	@author Ben Hayden
+ *	@author Ben Hayden succkss 
  */
 public class ClimbCommand extends Command {
 

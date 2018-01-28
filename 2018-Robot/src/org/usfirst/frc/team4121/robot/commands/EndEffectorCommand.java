@@ -1,18 +1,18 @@
-package org.usfirst.frc.team4121.robot.commands;
 
 import org.usfirst.frc.team4121.robot.Robot;
+import org.usfirst.frc.team4121.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DecreaseShootSpeedCommand extends Command {
+public class EndEffectorCommand extends Command {
 
-    public DecreaseShootSpeedCommand() {
+    public EndEffectorCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooting);
+    	requires(Robot.end);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class DecreaseShootSpeedCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooting.DecreaseShootSpeed();
+    	Robot.end.endeffector(RobotMap.END_EFFECTOR_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
