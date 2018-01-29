@@ -31,7 +31,7 @@ public class EndEffector extends Subsystem {
     public void stopWithLimitSwitch(){
     	if(!Robot.oi.limitSwitch.get())
     	{
-    		endmotor1.set(0);
+    		endmotor1.set(0); //sets motor speed to 0
         	endmotor2.set(0);
     	}
     	
