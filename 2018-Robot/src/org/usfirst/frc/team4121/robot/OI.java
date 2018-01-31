@@ -37,7 +37,7 @@ public class OI {
 	
 		//Encoders
 		rightEncoder = new Encoder(0,1, false, Encoder.EncodingType.k4X);
-		rightEncoder.setDistancePerPulse(.05277);  //.03598, keep this rate it works
+		rightEncoder.setDistancePerPulse(.05277);  //needs to be reset
 		rightEncoder.setReverseDirection(true);
 		rightEncoder.setSamplesToAverage(7);
 		leftEncoder = new Encoder(2,3, false, Encoder.EncodingType.k4X);

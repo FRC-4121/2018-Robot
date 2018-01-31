@@ -19,6 +19,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
@@ -220,17 +221,27 @@ public class Robot extends IterativeRobot {
 		Robot.oi.leftEncoder.reset();
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if(gameData.charAt(0) == 'L')
-		{
-			//Put left auto code here
-		} else {
-			//Put right auto code here
-		}
+		RobotMap.AUTO_SWITCH_POSITION = gameData.charAt(0); 
+		
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
+		
+	}
+	
+	/* left auto code
+	 */
+	public void leftAuto() {
+		
+		
+	}
+	
+	/* right auto code
+	 */
+	public void rightAuto() {
+		
 		
 	}
 
