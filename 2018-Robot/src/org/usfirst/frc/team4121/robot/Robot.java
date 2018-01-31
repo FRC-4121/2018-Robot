@@ -2,9 +2,12 @@
 package org.usfirst.frc.team4121.robot;
 
 import org.usfirst.frc.team4121.robot.commands.AutoStopCommand;
+import org.usfirst.frc.team4121.robot.commands.AutoStraightCommandGroup;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team4121.robot.commands.AutoDriveStraightCommandGroup;
+import org.usfirst.frc.team4121.robot.commands.AutoLeftSideCommandGroup;
+import org.usfirst.frc.team4121.robot.commands.AutoRightSideCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoTurnLeftCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoTurnRightCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.ExampleCommand;
@@ -111,12 +114,11 @@ public class Robot extends IterativeRobot {
 		
 		//Initialize dashboard choosers
 		chooser = new SendableChooser<>();
-		chooser.addDefault("Do nothing", new AutoStopCommand());
-		chooser.addObject("Straight Forward", new AutoDriveStraightCommandGroup());
-		chooser.addObject("Turn Left", new AutoTurnLeftCommandGroup());
-		chooser.addObject("Turn Right", new AutoTurnRightCommandGroup());
+		chooser.addDefault("Center", new AutoStraightCommandGroup());
+		chooser.addObject("Left", new AutoLeftSideCommandGroup());
+		chooser.addObject("Right", new AutoRightSideCommandGroup());
 		SmartDashboard.putData("Auto mode", chooser);
-		
+	
 		//Initialize vision processing, cameras and start autocapture for dashboard
 		imgLock = new Object();
 		camServer = CameraServer.getInstance();		
@@ -220,7 +222,7 @@ public class Robot extends IterativeRobot {
 		Robot.oi.rightEncoder.reset();
 		Robot.oi.leftEncoder.reset();
 		
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		gameData = DriverStation.getInstance().getGameSpecificMessage(); //get this data from the field people
 		RobotMap.AUTO_SWITCH_POSITION = gameData.charAt(0); 
 		
 
@@ -231,20 +233,6 @@ public class Robot extends IterativeRobot {
 		
 	}
 	
-	/* left auto code
-	 */
-	public void leftAuto() {
-		
-		
-	}
-	
-	/* right auto code
-	 */
-	public void rightAuto() {
-		
-		
-	}
-
 	
 	/**
 	 * This function is called periodically during autonomous
