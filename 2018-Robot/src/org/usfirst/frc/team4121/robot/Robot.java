@@ -33,6 +33,7 @@ import edu.wpi.first.wpilibj.vision.VisionThread;
 import edu.wpi.first.wpilibj.vision.VisionRunner;
 /**
  * The VM is configured to automatically run this class, and to call the
+ * We made a thing
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
