@@ -14,7 +14,7 @@ public class LimitSwitchSubsystem extends Subsystem {
     
     public void stopWithLimitSwitch() {
     	if(!Robot.oi.limitSwitch.get()) {
-    		Robot.end.stopEndEffector();
+//    		Robot.end.stopEndEffector();
     	}
     }
 }

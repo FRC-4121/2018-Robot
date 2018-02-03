@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *	Shifter subsystem
  *
- *	@author Ben Hayden
+ *	@author Ben Hayden 2.0  (saliva crustyman)
  */
 public class ShifterSubsystem extends Subsystem {
 	

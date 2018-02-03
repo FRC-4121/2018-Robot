@@ -5,7 +5,7 @@ import org.usfirst.frc.team4121.robot.commands.AutoStopCommand;
 import org.usfirst.frc.team4121.robot.commands.AutoStraightCommandGroup;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team4121.robot.commands.AutoDriveStraightCommandGroup;
+import org.usfirst.frc.team4121.robot.commands.AutoStraightCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoLeftSideCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoRightSideCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoTurnLeftCommandGroup;
@@ -119,6 +119,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Left", new AutoLeftSideCommandGroup());
 		chooser.addObject("Right", new AutoRightSideCommandGroup());
 		SmartDashboard.putData("Auto mode", chooser);
+
 	
 		//Initialize vision processing, cameras and start autocapture for dashboard
 		imgLock = new Object();
@@ -173,6 +174,12 @@ public class Robot extends IterativeRobot {
 		angleTraveled =0.0;
 		
 	}
+	
+	void Disabled() {
+		while(isDisabled()) {
+			
+		}
+	}
 
 	
 	/**
@@ -215,6 +222,16 @@ public class Robot extends IterativeRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
+		
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		RobotMap.AUTO_SWITCH_POSITION = gameData.charAt(0);
+//		if(gameData.charAt(0) == ) Ricky's Code
+//		{
+//			//Go straight and drop the cube
+//		} else {
+//			//Go straight and don't drop the cube
+//		}
 
 		//Get selected autonomous command
 		autonomousCommand = chooser.getSelected();

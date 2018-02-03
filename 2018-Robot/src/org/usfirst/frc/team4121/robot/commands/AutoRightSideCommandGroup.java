@@ -11,6 +11,7 @@ public class AutoRightSideCommandGroup extends CommandGroup {
 
     public AutoRightSideCommandGroup() {
         // Add Commands here:
+    	
     	if (RobotMap.AUTO_SWITCH_POSITION== 'R')
     	{
     		addSequential(new AutoDrive(1,2,3,4));
