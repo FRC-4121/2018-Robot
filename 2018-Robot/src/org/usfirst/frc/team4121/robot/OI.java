@@ -30,6 +30,7 @@ public class OI {
 	public ADXRS450_Gyro MainGyro;
 	public Encoder rightEncoder, leftEncoder;
 	public Button shoot, feed, climb, servo, shiftUp, shiftDown, gear, boiler, switchDrive, increaseShootSpeed, decreaseShootSpeed;
+	public Button elevator1, elevator2, elevator3;
 	public Button switchDrivexbox;
 	
 	
@@ -57,6 +58,10 @@ public class OI {
 		
 		//Buttons
 		shoot = new JoystickButton(rightJoy, 1);
+		elevator1 = new JoystickButton (rightJoy, 2);
+		elevator2 = new JoystickButton (rightJoy, 3);
+		elevator3 = new JoystickButton (rightJoy, 4);
+		
 		//decreaseShootSpeed = new JoystickButton (rightJoy, 2);
 		//servo = new JoystickButton(rightJoy,2);
 		//increaseShootSpeed = new JoystickButton (rightJoy, 3);
@@ -69,6 +74,7 @@ public class OI {
 		boiler = new JoystickButton(leftJoy, 3);
 		shiftDown = new JoystickButton(leftJoy, 4);
 		shiftUp = new JoystickButton(leftJoy, 5);
+ 
 		
 		
 		//Commands

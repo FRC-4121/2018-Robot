@@ -297,59 +297,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		
-//		  double motorOutput = m_motor.getMotorOutputPercent();
-//	        /* prepare line to print */
-//	        _sb.append("\tout:");
-//	        _sb.append(motorOutput);
-//	        _sb.append("\tspd:");
-//	        _sb.append(m_motor.getSelectedSensorVelocity(ConstantsElevator.kPIDLoopIdx));
-//
-//
-//
-//	        if (m_xboxController.getAButtonReleased()) // run to scale height
-//	        {
-//	            /* go to scale height */
-//	            oldTargetPos = targetPos;
-//	            targetPos = ConstantsElevator.dPosScale / inchesPerRev * 4096;
-//	            if (targetPos > oldTargetPos) {
-//	                m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedUp / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	                m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationUp / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	            } else {
-//	                m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	                m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	            }
-//
-//	        }
-//
-//	        if (m_xboxController.getBButtonPressed()) // run to switch height
-//	        {
-//	            oldTargetPos = targetPos;
-//	            targetPos = ConstantsElevator.dPosSwitch / inchesPerRev * 4096;
-//	            if (targetPos > oldTargetPos) {
-//	                m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedUp / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	                m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationUp / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	            } else {
-//	                m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	                m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	            }
-//	        }
-//
-//	        if (m_xboxController.getYButtonReleased()) // go to home
-//	        {
-//	            targetPos = 0;
-//	            m_motor.configMotionCruiseVelocity((int) ConstantsElevator.kCruiseSpeedDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	            m_motor.configMotionAcceleration((int) ConstantsElevator.kAccelerationDown / (int) inchesPerRev * encoderPulsesPerOutputRev / 10, ConstantsElevator.kTimeoutMs);
-//	        }
-//
-//
-//	        m_motor.set(ControlMode.MotionMagic, targetPos);
-//
-//	        if (++_loops >= 10) {
-//	            _loops = 0;
-//	            System.out.println(_sb.toString());
-//	        }
-//	        _sb.setLength(0);
-//	    
+
 		//Start scheduler
 		Scheduler.getInstance().run();
  
