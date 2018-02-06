@@ -48,7 +48,7 @@ public class OI {
 				
 		//Limit Switch
 		limitSwitchEnd = new DigitalInput(4);  
-		limitSwitchClimb = new DigitalInput(5);
+		//limitSwitchClimb = new DigitalInput(5);
 		
 		//Gyro
 		MainGyro = new ADXRS450_Gyro();
@@ -60,9 +60,9 @@ public class OI {
 		
 		//Buttons
 		shoot = new JoystickButton(rightJoy, 1);
-		elevator1 = new JoystickButton (rightJoy, 2);
-		elevator2 = new JoystickButton (rightJoy, 3);
-		elevator3 = new JoystickButton (rightJoy, 4);
+		//elevator1 = new JoystickButton (rightJoy, 2);
+		//elevator2 = new JoystickButton (rightJoy, 3);
+		//elevator3 = new JoystickButton (rightJoy, 4);
 		
 		//decreaseShootSpeed = new JoystickButton (rightJoy, 2);
 		//servo = new JoystickButton(rightJoy,2);

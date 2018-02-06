@@ -87,7 +87,7 @@ public class StopWithLimitSwitchCommand extends Command {
     	{
  
     		//Check status of limit switch
-        	if(Robot.oi.limitSwitch.get())
+        	if(Robot.oi.limitSwitchEnd.get())
         	{
         		
         		shouldStop = true;// can chnge speeds later depending on testing

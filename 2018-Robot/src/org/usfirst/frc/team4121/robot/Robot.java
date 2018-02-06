@@ -317,7 +317,7 @@ public class Robot extends IterativeRobot {
 
 		}
 		
-		SmartDashboard.putString("Limit Switch: ", Boolean.toString(Robot.oi.limitSwitch.get()));
+		//SmartDashboard.putString("Limit Switch: ", Boolean.toString(Robot.oi.limitSwitch.get()));
 
 		//Mr.Dermiggio's code
 //		if (++_loops >= 10) {

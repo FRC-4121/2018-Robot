@@ -41,9 +41,9 @@ public class RobotMap {
 
 	public static double SHOOTER_SPEED = -.6;//can change later depending on speed
 
-	public static double CLIMBER_SPEED = .2;//can change later depending on speed
+	public static double CLIMBER_SPEED = .6;//can change later depending on speed
 	
-	public static double CLIMBER_REVERSE_SPEED = -.2;
+	public static double CLIMBER_REVERSE_SPEED = -.6;
 
 	public static final int COMPRESSOR = 0;
 
