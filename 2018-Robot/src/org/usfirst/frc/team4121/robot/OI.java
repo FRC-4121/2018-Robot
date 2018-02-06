@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 import org.usfirst.frc.team4121.robot.commands.ClimbCommand;
+import org.usfirst.frc.team4121.robot.commands.ClimbReverseCommand;
 import org.usfirst.frc.team4121.robot.commands.ShiftDownCommand;
 import org.usfirst.frc.team4121.robot.commands.ShiftUpCommand;
 import org.usfirst.frc.team4121.robot.commands.StopClimbCommand;
@@ -26,10 +27,10 @@ public class OI {
 	//Initializations
 	public Joystick leftJoy, rightJoy;
 	public XboxController xbox;
-	public DigitalInput limitSwitch;
+	public DigitalInput limitSwitchEnd, limitSwitchClimb;
 	public ADXRS450_Gyro MainGyro;
 	public Encoder rightEncoder, leftEncoder;
-	public Button shoot, feed, climb, servo, shiftUp, shiftDown, gear, boiler, switchDrive, increaseShootSpeed, decreaseShootSpeed;
+	public Button shoot, feed, climb, reverseClimb, servo, shiftUp, shiftDown, gear, boiler, switchDrive, increaseShootSpeed, decreaseShootSpeed;
 	public Button elevator1, elevator2, elevator3;
 	public Button switchDrivexbox;
 	
@@ -46,7 +47,8 @@ public class OI {
 		leftEncoder.setSamplesToAverage(7);
 				
 		//Limit Switch
-		limitSwitch = new DigitalInput(4);      
+		limitSwitchEnd = new DigitalInput(4);  
+		limitSwitchClimb = new DigitalInput(5);
 		
 		//Gyro
 		MainGyro = new ADXRS450_Gyro();
@@ -69,13 +71,19 @@ public class OI {
 		//switchDrivexbox = new JoystickButton(rightJoy, 4);
 		
 		//feed = new JoystickButton(rightJoy, 3);
-		climb = new JoystickButton(leftJoy, 1);
+		climb = new JoystickButton(leftJoy, 4);
+		reverseClimb = new JoystickButton (leftJoy, 5);
+		
 		gear = new JoystickButton(leftJoy, 2);
 		boiler = new JoystickButton(leftJoy, 3);
-		shiftDown = new JoystickButton(leftJoy, 4);
-		shiftUp = new JoystickButton(leftJoy, 5);
+//		shiftDown = new JoystickButton(rightJoy, 4);
+//		shiftUp = new JoystickButton(rightJoy, 5);
  
 		
+		climb.whileHeld(new ClimbCommand());
+		climb.whenReleased(new StopClimbCommand () );
+		reverseClimb.whileHeld(new ClimbReverseCommand());
+		reverseClimb.whenReleased(new StopClimbCommand());
 		
 		//Commands
 		//servo.whileHeld(new OpenGateCommand());

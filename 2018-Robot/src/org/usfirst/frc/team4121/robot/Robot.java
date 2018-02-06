@@ -15,6 +15,7 @@ import org.usfirst.frc.team4121.robot.commands.FindGearTargetCommand;
 import org.usfirst.frc.team4121.robot.extraClasses.VisionRead;
 import org.usfirst.frc.team4121.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.DriveTrainSubsystem;
+import org.usfirst.frc.team4121.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.EndEffector;
 import org.usfirst.frc.team4121.robot.subsystems.ShifterSubsystem;
 
@@ -48,6 +49,7 @@ public class Robot extends IterativeRobot {
 	public static ShifterSubsystem shifter;
 	public static ClimberSubsystem climber;
 	public static EndEffector end;
+	public static ElevatorSubsystem elevator;
 	
 	//Commands
 	public static FindGearTargetCommand findGear;
@@ -297,6 +299,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		
+		
 
 		//Start scheduler
 		Scheduler.getInstance().run();
@@ -315,10 +318,17 @@ public class Robot extends IterativeRobot {
 		}
 		
 		SmartDashboard.putString("Limit Switch: ", Boolean.toString(Robot.oi.limitSwitch.get()));
-		
+
+		//Mr.Dermiggio's code
+//		if (++_loops >= 10) {
+//		_loops = 0;
+//		System.out.println(_sb.toString());
+//	}
+//	_sb.setLength(0);
+
 	}
 	
-	
+
 	/**
 	 * This function is called periodically during test mode
 	 */
