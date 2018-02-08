@@ -19,6 +19,9 @@ import org.usfirst.frc.team4121.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.EndEffector;
 import org.usfirst.frc.team4121.robot.subsystems.ShifterSubsystem;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.cscore.UsbCamera;
@@ -175,6 +178,55 @@ public class Robot extends IterativeRobot {
 		//gyro
 		angleTraveled =0.0;
 		
+		//elevator code
+		// * inches per rev = Drum Dia * PI * motor-drum sprocket ratio
+		// */
+		elevator.inchesPerRev = RobotMap.kWinchDrumDia * 3.1415 * RobotMap.kMotorSprocketTeeth /
+				RobotMap.kDrumShaftSprocketTeeth;
+		elevator.encoderPulsesPerOutputRev = RobotMap.kEncoderPPR * RobotMap.kEncoderRatio;
+
+		/* first choose the sensor */
+		elevator.m_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+		elevator.m_motor.setSensorPhase(true);
+
+		/* Set relevant frame periods to be at least as fast as periodic rate*/
+		elevator.m_motor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
+		elevator.m_motor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
+
+		/* set the peak, nominal outputs */
+		elevator.m_motor.configNominalOutputForward(0, RobotMap.kTimeoutMs);
+		elevator.m_motor.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
+		elevator.m_motor.configPeakOutputForward(1, RobotMap.kTimeoutMs);
+		elevator.m_motor.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+
+		elevator.m_motor2_follower.configNominalOutputForward(0, RobotMap.kTimeoutMs);
+		elevator.m_motor2_follower.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
+		elevator.m_motor2_follower.configPeakOutputForward(1, RobotMap.kTimeoutMs);
+		elevator.m_motor2_follower.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+
+		/* set closed loop gains in slot0 */
+		/* these will need to be tuned once the final masses are known */
+		elevator.m_motor.config_kF(RobotMap.kPIDLoopIdx, RobotMap.kf, RobotMap.kTimeoutMs);
+		elevator.m_motor.config_kP(RobotMap.kPIDLoopIdx, RobotMap.kp, RobotMap.kTimeoutMs);
+		elevator.m_motor.config_kI(RobotMap.kPIDLoopIdx, RobotMap.ki, RobotMap.kTimeoutMs);
+		elevator.m_motor.config_kD(RobotMap.kPIDLoopIdx, RobotMap.kd, RobotMap.kTimeoutMs);
+
+		/* set acceleration and vcruise velocity - see documentation */
+		/* velocity and acceleration has to be in encoder units
+		 * rev/s = inches per sec / inches per revolution
+		 * velocity is encoder pules per 100ms = rev/s*PPR*GearRatio/10 ;
+		 */
+		elevator.m_motor.configMotionCruiseVelocity((int) RobotMap.kCruiseSpeedUp / (int) elevator.inchesPerRev * elevator.encoderPulsesPerOutputRev / 10, RobotMap.kTimeoutMs);
+		elevator.m_motor.configMotionAcceleration((int) RobotMap.kAccelerationUp / (int) elevator.inchesPerRev * elevator.encoderPulsesPerOutputRev / 10, RobotMap.kTimeoutMs);
+
+		/* zero the sensor */
+		elevator.m_motor.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+
+		/* set current limit */
+		elevator.m_motor.configPeakCurrentLimit(RobotMap.kMaxMotorCurrent, 100);
+
+		elevator.m_motor2_follower.set(ControlMode.Follower, RobotMap.kMotorPort);
+		
 	}
 	
 	void Disabled() {
@@ -228,12 +280,6 @@ public class Robot extends IterativeRobot {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		RobotMap.AUTO_SWITCH_POSITION = gameData.charAt(0);
-//		if(gameData.charAt(0) == ) Ricky's Code
-//		{
-//			//Go straight and drop the cube
-//		} else {
-//			//Go straight and don't drop the cube
-//		}
 
 		//Get selected autonomous command
 		autonomousCommand = chooser.getSelected();
@@ -319,12 +365,6 @@ public class Robot extends IterativeRobot {
 		
 		//SmartDashboard.putString("Limit Switch: ", Boolean.toString(Robot.oi.limitSwitch.get()));
 
-		//Mr.Dermiggio's code
-//		if (++_loops >= 10) {
-//		_loops = 0;
-//		System.out.println(_sb.toString());
-//	}
-//	_sb.setLength(0);
 
 	}
 	

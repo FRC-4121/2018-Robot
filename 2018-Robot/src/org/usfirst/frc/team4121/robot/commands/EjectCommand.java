@@ -2,6 +2,7 @@ package org.usfirst.frc.team4121.robot.commands;
 
 import org.usfirst.frc.team4121.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -21,7 +22,11 @@ public class EjectCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.end.endeffector(- .5);
+    	
+    		Robot.end.endeffector(- .5);
+    	
+    	
+   
     }
 
     // Make this return true when this Command no longer needs to run execute()

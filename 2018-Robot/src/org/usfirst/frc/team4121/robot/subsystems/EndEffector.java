@@ -32,19 +32,14 @@ public class EndEffector extends Subsystem {
     //sets wheels spinning
     public void endeffector(double endspeed) {
     	endmotor1.set(endspeed);
-    	endmotor2.set(endspeed);
+    	endmotor2.set(-endspeed);//make one of these to be negative to account for difference in spin
     	
     }
     //stops wheels with limit switch 
     public void stopWithLimitSwitch(){
     	endmotor1.set(.5);
     	endmotor2.set(.5);
-//    	if(!Robot.oi.limitSwitch1.get())
-//    	{
-//    		endmotor1.set(0); //sets motor speed to 0
-//        	endmotor2.set(0);
-//    	}
-//    	
+
     }
     public void openArms()
     {
@@ -52,7 +47,13 @@ public class EndEffector extends Subsystem {
     }
     public void closeArms()
     {
-    	armSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	if(!Robot.oi.limitSwitchEnd.get())
+    	{
+    		endmotor1.set(0); //sets motor speed to 0
+        	endmotor2.set(0);
+        	armSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	}
+    	
     }
     public void resetArms()
     {
