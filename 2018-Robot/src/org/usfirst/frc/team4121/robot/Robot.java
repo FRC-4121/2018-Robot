@@ -10,7 +10,6 @@ import org.usfirst.frc.team4121.robot.commands.AutoLeftSideCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoRightSideCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoTurnLeftCommandGroup;
 import org.usfirst.frc.team4121.robot.commands.AutoTurnRightCommandGroup;
-import org.usfirst.frc.team4121.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4121.robot.commands.FindGearTargetCommand;
 import org.usfirst.frc.team4121.robot.extraClasses.VisionRead;
 import org.usfirst.frc.team4121.robot.subsystems.ClimberSubsystem;
@@ -114,7 +113,6 @@ public class Robot extends IterativeRobot {
 	
 		
 		//Initialize commands
-		autonomousCommand = new ExampleCommand();
 		findGear = new FindGearTargetCommand();
 		
 		
