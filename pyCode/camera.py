@@ -22,12 +22,18 @@ cap.set(10, 0.5)
 #Camera field of view
 FOV_angle_in_degrees = 23.55
 
+#Mount stuff
+mount_angle = 20
+mount_height = 16
+fov_v = 42
+
+
 #Width and height of target (cube) !!This value will differ based on orientation - more work to come
 width_of_target = 13
 height_of_object = 11
 
 #Minimum area required for system to create bounding rectangle (in px)
-minarea = 2500
+minarea = 500
 
 #Not sure what these do right now; theoretically stuff w/network tables
 ntVidOsTimestamp = ntproperty('/vmx/videoOSTimestamp', 0)
@@ -54,14 +60,14 @@ while True:
     blur = cv2.GaussianBlur(frame, (9, 9), 0)
     
     #Convert BGR image to HSV
-    #hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
+    hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
 
-    #Mask array params (BGR) (currently set to best approximation of Power Cube colors for brightness/lighting in Mr. Alkire's classroom)
-    lower = np.array([108, 198, 183])
+    #Mask array params (HSV) (currently set to best approximation of Power Cube colors for brightness/lighting in Mr. Alkire's classroom)
+    lower = np.array([30, 35, 172])
     upper = np.array([179, 255, 255])
 
     #Create mask to filter all values outside of the above range to black
-    mask = cv2.inRange(blur, lower, upper)
+    mask = cv2.inRange(hsv, lower, upper)
 
     #Finds contours in image (frame)
     frame, contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -69,10 +75,6 @@ while True:
     if len(contours) > 0:
             
         mainContour = contours[0]
-        
-        minDistance = 1000.0
-        minheight = 1000
-        contourArr = []
         
         #Area of contours
         area = cv2.contourArea(mainContour)
@@ -84,90 +86,13 @@ while True:
             x, y, w, h = cv2.boundingRect(mainContour)
 
             #Overwrite blur with image of bounding rectangle on contour
-            blur = cv2.rectangle(blur, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            blur = cv2.rectangle(hsv, (x, y), (x + w, y + h), (255, 255, 0), 2)
 
+
+            #integrate everything from here until the stop
             #Deal with integer problems
             w *= 1.0
             h *= 1.0
-
-            '''
-            #check if height is greater than width
-            if h > w:
-                if (h / w) < ((13/11) + .005) or (h / w) > ((13/11) - .005) or (h / w) < ((13 / math.sqrt(290) + .005)) or (h / w) > ((13 / math.sqrt(290) - .005)):
-                    #we have a single cube w/ height of 13 in
-                    height_of_target = 13
-                    width_of_target = (height_of_target / h) * w
-                    distance = (320 * width_of_target)/(2 * w * math.tan(math.radians(FOV_angle_in_degrees)))
-                    angle = math.degrees(math.atan2(((13.0/w) * ((x + (w/2.0)) - 160)),distance))
-                    if(240 - (h + y)) <= 0.005 or (240 - (h + y)) >= -0.005:
-                        height = 0
-                    else:
-                        height = (240 * height_of_object)/(240 - (h + y))
-                    print('Statement 1')
-                elif (h / w) < ((22/13) + 1) or (h / w) > ((22/13) - 1) or (h / w) < ((22/(13 * math.sqrt(2)) + 1)) or (h / w) < ((22/(13 * math.sqrt(2)) - 1)):
-                    #we have 2 cubes of standard rotation stacked
-                    height_of_target = 22
-                    width_of_target = (height_of_target / (h / 2.0)) * w
-                    distance = (320 * width_of_target)/(2 * w * math.tan(math.radians(FOV_angle_in_degrees)))
-                    angle = math.degrees(math.atan2(((13.0/w) * ((x + (w/2.0)) - 160)),distance))
-                    height = (240 * height_of_object)/(240 - ((h / 2.0) + y))
-                    if(240 - ((h / 2.0) + y)) <= 0.005 or (240 - ((h / 2.0) + y)) >= -0.005:
-                        height = 0
-                    else:
-                        height = (240 * height_of_object)/(240 - ((h/2.0) + y))
-                    print('Statement 2')
-                elif (h / w) > ((33/13) + 1) or (h / w) > ((33/13) - 1) or (h / w) < ((33/(13 * math.sqrt(2)) + 1)) or (h / w) < ((33/(13 * math.sqrt(2)) - 1)):
-                    #we have 3 standard cubes stacked
-                    width_of_target = (height_of_target / h) * w
-                    distance = (240 * height_of_target)/(2 * w * math.tan(math.radians(FOV_angle_in_degrees)))
-                    angle = math.degrees(math.atan2(((13.0/w) * ((x + (w/2.0)) - 160)),distance))
-                    height = (240 * height_of_object)/(240 - ((h / 3.0) + y))
-                    if(240 - ((h / 3.0) + y)) <= 0.005 or (240 - ((h / 3.0) + y)) >= -0.005:
-                        height = 0
-                    else:
-                        height = (240 * height_of_object)/(240 - ((h / 3.0) + y))
-                    print('Statement 3')
-                else:
-                    #we do not have any cubes
-                    distance = (320 * width_of_target)/(2 * w * math.tan(math.radians(FOV_angle_in_degrees)))
-                    angle = math.degrees(math.atan2(((13.0/w) * ((x + (w/2.0)) - 160)),distance))
-                    print('Statement 4')
-            elif h < w:
-                
-                if (h / w) > ((11/13) + 1) or (h / w) > ((11/13) - 1) or (h / w) < ((11/(13 * math.sqrt(2)) + 1)) or (h / w) < ((11/(13 * math.sqrt(2)) - 1)):
-                    #we have 1 cube
-                    #do stuff
-                    distance = (320 * width_of_target)/(2 * w * math.tan(math.radians(FOV_angle_in_degrees)))
-                    angle = math.degrees(math.atan2(((13.0/w) * ((x + (w/2.0)) - 160)),distance))
-                    if(240 - (h + y)) <= 0.005 and (240 - (h + y)) >= -0.005:
-                        height = 0
-                    else:
-                        height = (240 * height_of_object)/(240 - (h + y))
-                    
-                    print('Statement 5')
-                elif (h / w) > ((11/26) + 1) or (h / w) > ((11/26) - 1) or (h / w) < ((11/(2 *(13 * math.sqrt(2)) + 1))) or (h / w) < ((11/(2 * (13 * math.sqrt(2)) - 1))):
-                    #we have 2 cubes side-by-side
-                    distance = (320 * width_of_target)/(2 * (w/2.0) * math.tan(math.radians(FOV_angle_in_degrees)))
-                    angle = math.degrees(math.atan2(((13.0/w) * ((x + (w/2.0)) - 160)),distance))
-                    if(240 - (h + y)) <= 0.005 or (240 - (h + y)) >= -0.005:
-                        height = 0
-                    else:
-                        height = (240 * height_of_object)/(240 - (h + y))
-                    print('Statement 6')
-                elif (h / w) > ((11/39) + 1) or (h / w) > ((11/39) - 1) or (h / w) < ((11/(3 *(13 * math.sqrt(2)) + 1))) or (h / w) < ((11/(3 * (13 * math.sqrt(2)) - 1))):
-                    #we have 3 cubes side-by-side
-                    distance = (320 * width_of_target)/(2 * (w/3.0) * math.tan(math.radians(FOV_angle_in_degrees)))
-                    angle = math.degrees(math.atan2(((13.0/w) * ((x + (w/2.0)) - 160)),distance))
-                    if(240 - (h + y)) <= 0.005 or (240 - (h + y)) >= -0.005:
-                        height = 0
-                    else:
-                        height = (240 * height_of_object)/(240 - (h + y))
-                    print('Statement 7')
-            else:
-                distance = 0
-                height = 0
-                angle = 0
-                '''
 
             #Based on the aspect ratio and comparison of the width and the height determine the height of the box, width, distance to it and angle of offset
 
@@ -261,18 +186,26 @@ while True:
                 #print('Distance:', distance)
                 #print('target width:', w)
                 #print('angle offset:', angle)
-            angle_distance = (240 * height_of_target)/(2 * h * math.tan(math.radians(FOV_angle_in_degrees)))
+            extraHeight = (height_of_target/h) * y
+            #if extraHeight > 24 - height_of_target:
+               # extraHeight = 24 - height_of_target
+                
+            #distance = (mount_height - height_of_target - extraHeight)/math.tan(math.radians(mount_angle))
 
+            distance = ((height_of_target + extraHeight) - mount_height)/math.tan(math.radians(fov_v/2.0))
+
+            #stop the integration here
+            
             #distance = math.sqrt(math.fabs(math.pow(angle_distance, 2) - math.pow(24, 2)))
             #angle = math.degrees(math.atan2((height_of_target/h) * (x + (h/2.0) - 160),distance))
-            #print('distance', distance)
+            print('distance', distance * -1)
             print('height:', height_of_target)
-            print('width:', width_of_target)
+            #print('width:', width_of_target)
             #print('angle offset:', angle)
             #counter += 1
 
     #Show the videos (color version and mask)
-    cv2.imshow('blur', blur)
+    cv2.imshow('hsv', hsv)
     cv2.imshow('mask', mask)
     
     #Escape key ends program
