@@ -19,6 +19,7 @@ cap.set(3, 320)
 cap.set(4, 240)
 cap.set(10, 0.5)
 
+
 #Camera field of view
 FOV_angle_in_degrees = 23.55
 
