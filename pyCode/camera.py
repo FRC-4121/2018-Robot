@@ -201,3 +201,6 @@ while True:
 #Stop recording
 cap.release()
 cv2.destroyAllWindows()
+
+
+#Cool stuff
