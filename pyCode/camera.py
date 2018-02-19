@@ -87,7 +87,7 @@ while True:
             x, y, w, h = cv2.boundingRect(mainContour)
 
             #Overwrite blur with image of bounding rectangle on contour
-            blur = cv2.rectangle(hsv, (x, y), (x + w, y + h), (255, 255, 0), 2)
+            blur = cv2.rectangle(hsv, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
 
             #integrate everything from here until the stop
@@ -172,39 +172,24 @@ while True:
                 height_of_target = 0
                 width_of_target = 0
                 
-            ### !!! FIX THIS STUFF !!! ###
-            #Calculate distance to target and angle between center of screen and center of target
-            #distance = (320 * width_of_target)/(2 * w * math.tan(math.radians(FOV_angle_in_degrees)))
-            #angle = math.degrees(math.atan2(((13.0/w) * ((x + (w/2.0)) - 160)),distance))
-            #height = 
-                '''
-                if distance < minDistance:
-                    minDistance = distance
-                '''     
-            #distance = (240 * height_of_target)/(2 * h * math.tan(math.radians(FOV_angle_in_degrees)))
-            #Slows down output (outputting distance and angle currently)
-            #if counter % 100 == 0:
-                #print('Distance:', distance)
-                #print('target width:', w)
-                #print('angle offset:', angle)
-            extraHeight = (height_of_target/h) * y
-            #if extraHeight > 24 - height_of_target:
-               # extraHeight = 24 - height_of_target
-                
-            #distance = (mount_height - height_of_target - extraHeight)/math.tan(math.radians(mount_angle))
 
-            distance = ((height_of_target + extraHeight) - mount_height)/math.tan(math.radians(fov_v/2.0))
+            #calculate distance based off of height of cube (in inches)
+            extraHeight = (height_of_target/h) * y
+            distance = ((height_of_target + extraHeight) - mount_height)/math.tan(math.radians(fov_v/2.0)) * -1
+
+            #calculate angle offset to center of cube (in degrees)
+            angle = math.degrees(math.atan2((height_of_target/h) * (x + (w/2.0) - 160), distance))
 
             #stop the integration here
-            
-            #distance = math.sqrt(math.fabs(math.pow(angle_distance, 2) - math.pow(24, 2)))
-            #angle = math.degrees(math.atan2((height_of_target/h) * (x + (h/2.0) - 160),distance))
-            print('distance', distance * -1)
-            print('height:', height_of_target)
-            #print('width:', width_of_target)
-            #print('angle offset:', angle)
-            #counter += 1
 
+            if counter % 100 == 0:
+                print('distance', distance)
+                print('height:', height_of_target)
+                print('width:', width_of_target)
+                print('angle offset:', angle)
+
+            counter += 1
+            
     #Show the videos (color version and mask)
     cv2.imshow('hsv', hsv)
     cv2.imshow('mask', mask)
